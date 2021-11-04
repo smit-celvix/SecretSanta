@@ -1,28 +1,43 @@
+/*A secret santa custom program developed by yours truely johntheripper only for saskatoon discord group and beloved technical pyro (Sean).
+*
+* Sorry Sean I can't participate this time but this would be my gift to you this year.
+*
+* I can probably fix this and add more functions but I don't have much brain power for it.
+*
+* Developed by johntheripp3r for Technical花火#8729
+*
+* Date: Nov 3rd 2021.
+*
+* */
+
+
 package test;
 
 import java.util.*;
 
 public class SecretSanta
 {
-	static Scanner scanner;
-	static int count;
+	// Variable declaration, you probably don't need to worry about it
 	static String[] input;
 	static List<String> stringParticipantsList;
 	static List<Participant> participantList;
 	static Random random;
 	static int randomNumber;
 
-	static int index;
-	static int maxCount;
 	static int left;
 
 	public static void main(String[] args)
 	{
+		// Insert the name of the peoples here
 		input = new String[]{"disco", "nerm", "pyro", "null", "scorpio"};
 		stringParticipantsList = new ArrayList<>();
 		participantList = new ArrayList<>();
 		random = new Random();
 		populateParticipantList();
+
+		// Enter the list of people who you don't want giving gifts to each other, if there are many exceptions and a short list,
+		// this program will fail and you'll have to run it again.
+		// Who wabts to avoid whom, you get the point, example below
 		wantsToAvoid("scorpio", "disco", "null");
 
 		print(participantList);
@@ -31,11 +46,11 @@ public class SecretSanta
 		left = participantList.size();
 		for (Participant p : participantList)
 		{
-			while (p.getSecretSantaFor() == "")
+			while (p.getSecretSantaFor().equals(""))
 			{
 				randomNumber = random.nextInt(stringParticipantsList.size());
 				Participant matched = participantList.get(randomNumber);
-				if (p.getName() != matched.getName())
+				if (!p.getName().equals(matched.getName()))
 				{
 					if (!matched.isTaken())
 					{
@@ -53,7 +68,7 @@ public class SecretSanta
 					if(left == 1)
 					{
 						print("It's an infinite loop as " + p.getName() + " is the only one left for " + matched.getName());
-						print("Force close this program and run it again. Can I implement something to deal with this? yes, will I? no.");
+						print("Force close this program and run it again. Can I implement something to deal with this? yes, will I? no. May be...");
 						return;
 					}
 				}
@@ -63,18 +78,11 @@ public class SecretSanta
 
 	}
 
-
-	private static void reOrderList()
-	{
-
-
-	}
-
 	private static void wantsToAvoid(String name, String... args)
 	{
 		for (Participant p : participantList)
 		{
-			if (name == p.getName())
+			if (name.equals(p.getName()))
 			{
 				p.setPeopleToAvoid(List.of(args));
 			}
@@ -84,7 +92,7 @@ public class SecretSanta
 		{
 			for (String arg : args)
 			{
-				if (arg == pa.getName())
+				if (arg.equals(pa.getName()))
 				{
 					pa.setPeopleToAvoid(List.of(name));
 				}
@@ -110,22 +118,10 @@ public class SecretSanta
 class PeopleAvoidanceComparator implements Comparator<Participant>
 {
 	@Override
-	public int compare(Participant p1, Participant p2)
+	public int compare(Participant participant1, Participant participant2)
 	{
-		int returnValue = 0;
-		int p1AvoidSize = p1.getPeopleToAvoid().size();
-		int p2AvoidSize = p2.getPeopleToAvoid().size();
-		if(p1AvoidSize < p2AvoidSize)
-			returnValue = -1;
-		else
-			if(p1AvoidSize == p2AvoidSize)
-				returnValue = 0;
-			else
-				returnValue = 1;
-
-		System.out.print(p1.getName() + " " + p1.getPeopleToAvoid().size() + " TO ");
-		System.out.println(p2.getName() + " " + p2.getPeopleToAvoid().size());
-		System.out.println(p1.getPeopleToAvoid().size() > p2.getPeopleToAvoid().size() ? p1.getPeopleToAvoid().size() : p1.getPeopleToAvoid().size() == p2.getPeopleToAvoid().size() ? p1.getPeopleToAvoid().size() : p2.getPeopleToAvoid().size());
+		int p1AvoidSize = participant1.getPeopleToAvoid().size();
+		int p2AvoidSize = participant2.getPeopleToAvoid().size();
 		return p2AvoidSize - p1AvoidSize;
 	}
 
