@@ -11,8 +11,6 @@
 * */
 
 
-package test;
-
 import java.util.*;
 
 public class SecretSanta
@@ -29,7 +27,8 @@ public class SecretSanta
 	public static void main(String[] args)
 	{
 		// Insert the name of the peoples here
-		input = new String[]{"disco", "nerm", "pyro", "null", "scorpio"};
+		// Make sure you get the spelling right everytime you trynna add someone here, otherwise it wont work
+		input = new String[]{"disco", "nerm", "pyro", "null", "scorpio", "crypto", "greg", "rabidfox", "awhilesbrook", "bergo", "james", "raevb", "l-rae", "daniell"};
 		stringParticipantsList = new ArrayList<>();
 		participantList = new ArrayList<>();
 		random = new Random();
@@ -37,12 +36,15 @@ public class SecretSanta
 
 		// Enter the list of people who you don't want giving gifts to each other, if there are many exceptions and a short list,
 		// this program will fail and you'll have to run it again.
-		// Who wabts to avoid whom, you get the point, example below
-		wantsToAvoid("scorpio", "disco", "null");
+		// Who wants to avoid whom, you get the point, example below
+		wantsToAvoid("scorpio", "disco");
+		// Also you can do as below:
+		// wantsToAvoid("scorpio", "disco", "null", "nerm");
 
-		print(participantList);
+
+		//print(participantList);
 		Collections.sort(participantList, new PeopleAvoidanceComparator());
-		print(participantList);
+		//print(participantList);
 		left = participantList.size();
 		for (Participant p : participantList)
 		{
